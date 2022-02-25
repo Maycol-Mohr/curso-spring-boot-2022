@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.maycolmohrcursospringboot.domain.Categoria;
 import com.maycolmohrcursospringboot.domain.Cidade;
+import com.maycolmohrcursospringboot.domain.Cliente;
+import com.maycolmohrcursospringboot.domain.Endereco;
 import com.maycolmohrcursospringboot.domain.Estado;
 import com.maycolmohrcursospringboot.domain.Produto;
+import com.maycolmohrcursospringboot.domain.enums.TipoCliente;
 import com.maycolmohrcursospringboot.repositories.CategoriaRepository;
 import com.maycolmohrcursospringboot.repositories.CidadeRepository;
+import com.maycolmohrcursospringboot.repositories.ClienteRepository;
+import com.maycolmohrcursospringboot.repositories.EnderecoRepository;
 import com.maycolmohrcursospringboot.repositories.EstadoRepository;
 import com.maycolmohrcursospringboot.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class CursospringbootApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursospringbootApplication.class, args);
@@ -67,5 +78,17 @@ public class CursospringbootApplication implements CommandLineRunner {
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36458602834", TipoCliente.PESSOAFISICA);
+		
+		cli1.getTelefones().addAll(Arrays.asList("123456789", "98765432"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "apto 303", "Jardim", "32254396", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "24345678", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));		
 	}
 }
