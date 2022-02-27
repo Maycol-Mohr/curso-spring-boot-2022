@@ -2,22 +2,42 @@ package com.maycolmohrcursospringboot.dto;
 
 import java.io.Serializable;
 
-import com.maycolmohrcursospringboot.domain.enums.TipoCliente;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.maycolmohrcursospringboot.domain.enums.TipoCliente;
+import com.maycolmohrcursospringboot.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min=5, max=120, message = "O tamanho deve ser entre 5 e 120 caracteres!")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Email(message = "Email inválido!")
 	private String email;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cpfOuCnpj;
 	private TipoCliente tipo;
 	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String logradouro;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String numero;
 	private String complemento;
 	private String bairro;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cep;
 	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
@@ -27,23 +47,6 @@ public class ClienteNewDTO implements Serializable {
 	public ClienteNewDTO() {
 	}
 
-	/*
-	public ClienteNewDTO(Cliente entity) {
-		nome = entity.getNome();
-		email = entity.getEmail();
-		cpfOuCnpj = entity.getCpfOuCnpj();
-		tipo = entity.getTipo();
-		logradouro = entity.get
-		this.numero = numero;
-		this.complemento = complemento;
-		this.bairro = bairro;
-		this.cep = cep;
-		this.telefone1 = telefone1;
-		this.telefone2 = telefone2;
-		this.telefone3 = telefone3;
-		this.cidadeId = cidadeId;
-	}
-*/
 	public String getNome() {
 		return nome;
 	}
