@@ -14,7 +14,6 @@ import com.maycolmohrcursospringboot.domain.enums.EstadoPagamento;
 import com.maycolmohrcursospringboot.repositories.ItemPedidoRepository;
 import com.maycolmohrcursospringboot.repositories.PagamentoRepository;
 import com.maycolmohrcursospringboot.repositories.PedidoRepository;
-import com.maycolmohrcursospringboot.repositories.ProdutoRepository;
 import com.maycolmohrcursospringboot.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -27,9 +26,6 @@ public class PedidoService {
 	private PagamentoRepository pagamentoRepository;
 	
 	@Autowired
-	private ProdutoRepository produtoRepository;
-	
-	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
 	@Autowired
@@ -40,6 +36,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ProdutoService produtoService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	public Pedido find(Integer id) { 
 		 Optional<Pedido> obj = repo.findById(id); 
@@ -67,7 +66,7 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	} 
 }
