@@ -16,7 +16,6 @@ import com.maycolmohrcursospringboot.domain.Cliente;
 import com.maycolmohrcursospringboot.domain.Endereco;
 import com.maycolmohrcursospringboot.dto.ClienteDTO;
 import com.maycolmohrcursospringboot.dto.ClienteNewDTO;
-import com.maycolmohrcursospringboot.repositories.CidadeRepository;
 import com.maycolmohrcursospringboot.repositories.ClienteRepository;
 import com.maycolmohrcursospringboot.repositories.EnderecoRepository;
 import com.maycolmohrcursospringboot.services.exceptions.DataIntegrityException;
