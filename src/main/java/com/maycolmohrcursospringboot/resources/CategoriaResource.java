@@ -76,16 +76,5 @@ public class CategoriaResource {
 		Page<Categoria> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<CategoriaDTO> listDto = list.map(x -> new CategoriaDTO(x));
 		return ResponseEntity.ok().body(listDto);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
