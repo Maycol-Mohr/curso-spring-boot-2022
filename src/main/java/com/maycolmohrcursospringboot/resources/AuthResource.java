@@ -16,8 +16,6 @@ import com.maycolmohrcursospringboot.security.UserSS;
 import com.maycolmohrcursospringboot.services.AuthService;
 import com.maycolmohrcursospringboot.services.UserService;
 
- 
-
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthResource {
@@ -30,16 +28,16 @@ public class AuthResource {
 	
 	@RequestMapping(value = "/refresh_token", method = RequestMethod.POST)
 	public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
-		UserSS user = UserService.Authenticated();  
+		UserSS user = UserService.Authenticated();   
 		String token = jwtUtil.generateToken(user.getUsername());
 		response.addHeader("Authorization", "Bearer " + token);
-		 response.addHeader("access-control-expose-headers", "Authorization");
+		response.addHeader("access-control-expose-headers", "Authorization");
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDto) {
-		service.sendNewPassword(objDto.getEmail()); 
+		service.sendNewPassword(objDto.getEmail());
 		return ResponseEntity.noContent().build();
 	}
 } 
